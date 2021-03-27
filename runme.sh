@@ -1,7 +1,5 @@
 #!/bin/bash
 
-while go build main.go > /dev/null;
-do sleep 1;
-done;
-echo "build done"
+go build main.go &
+echo "build done" &
 ./main
