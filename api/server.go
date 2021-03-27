@@ -66,8 +66,10 @@ func (server *Server) sendIndex() http.HandlerFunc {
 		data := Data{nil, "we", "ar", "e"}
 		data.From = "/"
 
-		templates, _ := template.ParseFiles(getAllTemplateFiles("/index.html")...)
-
+		templates, err := template.ParseFiles(getAllTemplateFiles("/index.html")...)
+		if err != nil {
+			w.Write([]byte("????????"))
+		}
 		executeTemplates(templates, w, data)
 	}
 }
