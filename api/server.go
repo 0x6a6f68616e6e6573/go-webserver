@@ -68,7 +68,7 @@ func (server *Server) sendIndex() http.HandlerFunc {
 		data.From = getPathFromURL(r.URL.Path)
 
 		allFiles := getAllTemplateFiles(data.From)
-		
+
 		templates, _ := template.ParseFiles(allFiles...)
 
 		executeTemplates(templates, w, data)
@@ -111,6 +111,7 @@ func getPathFromURL(urlPath string) string {
 		}
 		path = fmt.Sprintf("%s/%s", path, pathpart)
 	}
+	fmt.Printf("%v\n",path)
 	return path
 }
 
