@@ -2,4 +2,4 @@
 
 go build main.go &
 echo "build done" &
-./main
+lxterminal -e "./main"
