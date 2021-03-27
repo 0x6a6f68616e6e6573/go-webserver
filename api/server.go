@@ -70,7 +70,7 @@ func (server *Server) sendIndex() http.HandlerFunc {
 		allFiles := getAllTemplateFiles(fmt.Sprintf("%vindex.html", data.From))
 
 		templates, _ := template.ParseFiles(allFiles...)
-		fmt.Printf("%v\n", templates)
+
 		executeTemplates(templates, w, data)
 	}
 }
@@ -127,11 +127,12 @@ func getAllTemplateFiles(path string) []string {
 			allFiles = append(allFiles, "./views/templates/"+filename)
 		}
 	}
-	// allFiles = append(allFiles, fmt.Sprintf("./views%s", path))
+	allFiles = append(allFiles, fmt.Sprintf("./views%s", path))
 	return allFiles
 }
 
 func executeTemplates(templates *template.Template, w http.ResponseWriter, data Data) {
+	fmt.Printf("%v\n", templates)
 	s1 := templates.Lookup("header.html")
 	s1.ExecuteTemplate(w, "header", nil)
 	s2 := templates.Lookup("navigation.html")
