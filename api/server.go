@@ -65,10 +65,10 @@ func (server *Server) sendIndex() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		data := Data{nil, "we", "ar", "e"}
 		data.From = "/"
-		w.Write([]byte("Hello World"))
-		// templates, _ := template.ParseFiles(getAllTemplateFiles("/index.html")...)
 
-		// executeTemplates(templates, w, data)
+		templates, _ := template.ParseFiles(getAllTemplateFiles("/index.html")...)
+
+		executeTemplates(templates, w, data)
 	}
 }
 
