@@ -132,7 +132,6 @@ func getAllTemplateFiles(path string) []string {
 }
 
 func executeTemplates(templates *template.Template, w http.ResponseWriter, data Data) {
-	fmt.Printf("%v\n", templates)
 	s1 := templates.Lookup("header.html")
 	s1.ExecuteTemplate(w, "header", nil)
 	s2 := templates.Lookup("navigation.html")
