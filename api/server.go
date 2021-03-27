@@ -127,6 +127,7 @@ func getAllTemplateFiles(path string) []string {
 			allFiles = append(allFiles, "./views/templates/"+filename)
 		}
 	}
+	fmt.Println("ok")
 	allFiles = append(allFiles, fmt.Sprintf("./views%s", path))
 	return allFiles
 }
