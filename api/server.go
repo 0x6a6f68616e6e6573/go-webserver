@@ -118,7 +118,7 @@ func getAllTemplateFiles(path string) []string {
 	var allFiles []string
 	files, err := ioutil.ReadDir("./views/templates")
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("Err on reading templates")
 	}
 
 	for _, file := range files {
