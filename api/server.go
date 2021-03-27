@@ -63,10 +63,13 @@ func (server *Server) sendFile() http.HandlerFunc {
 
 func (server *Server) sendIndex() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		data := Data{nil, "we", "ar", "e"}
-		data.From = "/"
+		data := Data{nil, "", "", ""}
 
-		templates, _ := template.ParseFiles(getAllTemplateFiles("/index.html")...)
+		data.From = getPathFromURL(r.URL.Path)
+
+		allFiles := getAllTemplateFiles(data.From)
+		
+		templates, _ := template.ParseFiles(allFiles...)
 
 		executeTemplates(templates, w, data)
 	}
