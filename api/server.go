@@ -67,7 +67,7 @@ func (server *Server) sendIndex() http.HandlerFunc {
 		data.From = "/"
 
 		templates, _ := template.ParseFiles(getAllTemplateFiles("/index.html")...)
-		fmt.Println("ok")
+
 		executeTemplates(templates, w, data)
 	}
 }
@@ -132,11 +132,16 @@ func getAllTemplateFiles(path string) []string {
 func executeTemplates(templates *template.Template, w http.ResponseWriter, data Data) {
 	s1 := templates.Lookup("header.html")
 	s1.ExecuteTemplate(w, "header", nil)
+	fmt.Println("1")
 	s2 := templates.Lookup("navigation.html")
 	s2.ExecuteTemplate(w, "navigation", nil)
+	fmt.Println("2")
 	s3 := templates.Lookup("index.html")
 	s3.ExecuteTemplate(w, "index", nil)
+	fmt.Println("3")
 	s4 := templates.Lookup("footer.html")
 	s4.ExecuteTemplate(w, "footer", nil)
+	fmt.Println("4")
 	s4.Execute(w, data)
+	fmt.Println("5")
 }
