@@ -1,0 +1,118 @@
+@use 'colors';
+@use 'heights';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+$themes: (
+        default: (
+                // logo: url("../images/brand/logo_vertical.svg"),
+                bg: colors.$grey100,
+                // card-bg: $bg--card--light,
+                text: colors.$grey900,
+                // text-secondary: $text--2--light,
+                // link: $brand--blue--light,
+                // hover: $hover--light,
+                // border: $border--light
+        ),
+        dark: (
+                // logo: url("../images/brand/logo_vertical--invert.svg"),
+                bg: colors.$grey900,
+                // card-bg: $bg--card--dark,
+                text:  colors.$grey100,
+                // text-secondary: $text--2--dark,
+                // link: $brand--blue--dark,
+                // hover: $hover--dark,
+                // border: $border--dark
+        ),
+);
+
+@mixin themed() {
+  @each $theme, $map in $themes {
+    .theme--#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function t($key) {
+  @return map-get($theme-map, $key);
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  font-family: 'Comfortaa', cursive;
+}
+
+.li {
+  li {
+    display: inline-block;
+    // padding: 1em;
+    font-size: 1.1em;
+    margin: 0 5px;
+    padding: 0 5px;
+
+    & a {
+      color: colors.$trueGrey300;
+      text-decoration: none;
+      line-height: heights.$navHeight - heights.$navNavLine;
+    }
+
+    &.current_page_item {
+      a {
+        color: colors.$lime400;
+      }
+
+      border-bottom: heights.$navNavLine solid colors.$lime400;
+    }
+  }
+}
+
+nav {
+  &.navigation {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    background-color: colors.$grey900;
+    height: heights.$navHeight;
+    display: flex;
+    ul {
+      list-style: none;
+      @extend .li
+    }
+
+    .toRight {
+      margin-left: auto;
+    }
+  }
+}
+
+#root{
+  position: relative;
+  top: heights.$navHeight;
+  width: 100%;
+  @include themed() {
+    color: t(text);
+    background: t(bg);
+  }
+  min-height: calc(100vh - #{heights.$navHeight} - #{heights.$footerHeight});
+}
+
+footer{
+  .footer{
+    position: relative;
+    height: heights.$footerHeight;
+    top: heights.$navHeight;
+    width: 100%;
+    background-color: colors.$red500;
+  }
+}

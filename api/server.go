@@ -4,7 +4,8 @@ import (
 	// "encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
+
+	// "log"
 	"net/http"
 
 	"html/template"
@@ -24,8 +25,8 @@ type Server struct {
 
 type Data struct {
 	Error error
-	name  string
-	theme string
+	Name  string
+	Theme string
 	From  string
 }
 
@@ -53,17 +54,36 @@ func (server *Server) routes() {
 
 func (server *Server) sendFile() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		parsedTemplate, _ := template.ParseFiles(fmt.Sprintf("static/%s/%s", mux.Vars(r)["type"], mux.Vars(r)["filename"]))
+		path := fmt.Sprintf("static/%s/%s", mux.Vars(r)["type"], mux.Vars(r)["filename"])
 
-		if err := parsedTemplate.Execute(w, nil); err != nil {
-			log.Println("Error executing template or file not found")
+		data, err := ioutil.ReadFile(string(path))
+
+		if err != nil {
+			w.WriteHeader(http.StatusNotFound)
+			w.Write([]byte("404 - File Not Found!"))
 		}
+
+		var contentType string
+		if strings.HasSuffix(path, ".css") {
+			contentType = "text/css"
+		} else if strings.HasSuffix(path, ".js") {
+			contentType = "application/javascript"
+		} else if strings.HasSuffix(path, ".png") {
+			contentType = "image/png"
+		} else if strings.HasSuffix(path, ".svg") {
+			contentType = "image/svg+xml"
+		} else {
+			contentType = "text/plain"
+		}
+
+		w.Header().Add("Content-Type", contentType)
+		w.Write(data)
 	}
 }
 
 func (server *Server) sendIndex() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		data := Data{nil, "", "", ""}
+		data := Data{nil, "Jo", "dark", ""}
 
 		data.From = "/"
 
@@ -133,12 +153,12 @@ func getAllTemplateFiles(path string) []string {
 
 func executeTemplates(templates *template.Template, w http.ResponseWriter, data Data) {
 	s1 := templates.Lookup("header.html")
-	s1.ExecuteTemplate(w, "header", nil)
+	s1.ExecuteTemplate(w, "header", data)
 	s2 := templates.Lookup("navigation.html")
-	s2.ExecuteTemplate(w, "navigation", nil)
+	s2.ExecuteTemplate(w, "navigation", data)
 	s3 := templates.Lookup("index.html")
-	s3.ExecuteTemplate(w, "index", nil)
+	s3.ExecuteTemplate(w, "index", data)
 	s4 := templates.Lookup("footer.html")
-	s4.ExecuteTemplate(w, "footer", nil)
+	s4.ExecuteTemplate(w, "footer", data)
 	s4.Execute(w, data)
 }

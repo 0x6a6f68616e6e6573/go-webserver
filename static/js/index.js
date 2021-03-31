@@ -1,3 +1,5 @@
+'use strict';
+
 const root = document.getElementById("root");
 const _data = JSON.parse(data);
 
@@ -15,8 +17,8 @@ function fetchURL(url) {
   window.history.pushState('', '', url);
 }
 
-const navbar = document.querySelector('.navbar');
-const links = navbar.querySelectorAll("a");
+const navigation = document.querySelector('.navigation');
+const links = navigation.querySelectorAll("a");
 
 links.forEach((link) => {
   link.onclick = (e) => {
