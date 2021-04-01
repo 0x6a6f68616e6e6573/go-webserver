@@ -1,8 +1,5 @@
 {{define "navigation"}}
-<nav class="navigation">
-  <!-- <a href="/test/main.html">Test>Main</a>
-  <a href="/">Home</a> -->
-  
+<!-- <nav class="navigation">
   <ul>
     <li class="current_page_item"><a href="/">LOGO</a></li>
     <li><a href="/earn">Earn</a></li>
@@ -13,5 +10,64 @@
     <li><a href="">Profile</a></li>
     <li><a href="">Settings</a>
   </ul>
-</nav>
+</nav> -->
+<!-- <header class="navbar bg-primary">
+  <section class="navbar-section">
+    <a href="/" class="navbar-brand"><div class="bg-dark text-large logo-text">Geekbux.com</div></a>
+    <a href="/earn" class="btn btn-link text-light text-large">Earn</a>
+    <a href="/withdraw" class="btn btn-link text-light text-large">Withdraw</a>
+  </section>
+  <section class="navbar-section">
+    <div class="input-group input-inline">
+      <a href="..." class="btn btn-link text-light text-large"><i class="icon icon-mail"></i></a>
+      <a href="..." class="btn btn-link text-light text-large"><i class="icon icon-message"></i></a>
+      <a href="..." class="btn btn-link text-light text-large"><i class="icon icon-people"></i></a>
+      <input class="form-input" type="text" placeholder="search">
+      <button class="btn btn-primary input-group-btn bg-secondary text-dark">Search</button>
+      <a href="..." class="btn btn-link text-light text-large"><i class="icon icon-menu"></i></a>
+    </div>
+  </section>
+  </header> -->
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Geekbux.com</a>
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button> -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/"><img class="navbar-item-icon" src="/static/img/house.svg" alt="Bell">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/earn"><img class="navbar-item-icon" src="/static/img/credit-card-2-front.svg" alt="Bell">Earn</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="/withdraw" tabindex="-1" aria-disabled="true"><img class="navbar-item-icon" src="/static/img/wallet2.svg" alt="Bell">Withdraw</a>
+          </li>
+        </ul>
+        <!-- <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> -->
+        <img class="navbar-icon" src="/static/img/bell.svg" alt="Bell">
+        <img class="navbar-icon" src="/static/img/chat-right.svg" alt="Chat-Right">
+        <img class="navbar-icon" src="/static/img/person-circle.svg" alt="Person-Circle">
+        <img class="navbar-icon" src="/static/img/gear.svg" alt="Gear">
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<div class="toast-container">
+  <div class="toast toast-success">
+    <button class="btn btn-clear float-right"></button>
+    The site is currently still under construction, please check our twitter account <a
+      href="http://twitter.com/">Geekbux</a> for any more information.<br>
+    If you have any questions, please contatct 0x6a6f#8102 on Discord regarding any questions.
+  </div>
+</div>
 {{end}}

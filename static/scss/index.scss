@@ -50,55 +50,67 @@ $themes: (
 body {
   width: 100%;
   height: 100vh;
-  font-family: 'Comfortaa', cursive;
+  font-family: "SF Mono", "Segoe UI Mono", "Roboto Mono", Menlo, Courier, monospace;
 }
 
-.li {
-  li {
-    display: inline-block;
-    // padding: 1em;
-    font-size: 1.1em;
-    margin: 0 5px;
-    padding: 0 5px;
-
-    & a {
-      color: colors.$trueGrey300;
-      text-decoration: none;
-      line-height: heights.$navHeight - heights.$navNavLine;
-    }
-
-    &.current_page_item {
-      a {
-        color: colors.$lime400;
-      }
-
-      border-bottom: heights.$navNavLine solid colors.$lime400;
-    }
+img{
+  &.navbar-icon{
+    margin: 10px;
+    width: 24px;
+    height: 24px;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(134deg) brightness(101%) contrast(104%);
+  }
+  &.navbar-item-icon{
+    vertical-align:middle;
+    margin: 3px;
+    width: 1em;
+    height: 1em;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(134deg) brightness(101%) contrast(104%);
+    opacity: 0.55;
+  }
+  &.active{
+    opacity: 1;
   }
 }
-
-nav {
-  &.navigation {
-    position: fixed;
-    width: 100%;
-    z-index: 1;
-    background-color: colors.$grey900;
-    height: heights.$navHeight;
+.active{
+  .navbar-item-icon{
+    opacity: 1;
+  }
+}
+.disabled{
+  .navbar-item-icon{
+    opacity: 0.25;
+  }
+}
+.nav-item{
+  .nav-link{
     display: flex;
-    ul {
-      list-style: none;
-      @extend .li
-    }
-
-    .toRight {
-      margin-left: auto;
-    }
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25em;
   }
+}
+
+.toast-container{
+  position: absolute;
+  width: 100%;
+  .toast{
+    margin: auto;
+    width: 65% !important;
+  }
+}
+
+.index-container{
+  display:flex;
+}
+
+.chat-container{
+  width: 275px;
 }
 
 #root{
-  position: relative;
-  top: heights.$navHeight;
+  // position: relative;
+  // top: heights.$navHeight;
   width: 100%;
   @include themed() {
     color: t(text);
@@ -111,7 +123,6 @@ footer{
   .footer{
     position: relative;
     height: heights.$footerHeight;
-    top: heights.$navHeight;
     width: 100%;
     background-color: colors.$red500;
   }
